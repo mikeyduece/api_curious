@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
+    require 'pry'; binding.pry
     if params[:provider].present?
       @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       set_session_user_id
