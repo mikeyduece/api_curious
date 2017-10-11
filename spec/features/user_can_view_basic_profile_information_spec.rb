@@ -2,15 +2,18 @@ require 'rails_helper'
 
 feature 'As a User I can' do
   scenario 'view basic profile information' do
-    user = create(:user)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    stub_omniauth
 
-    visit user_path(user)
+    visit '/'
+    click_on('Login with GitHub')
+
+    user = User.last
 
     expect(page).to have_content(user.email)
     expect(page).to have_content(user.name)
-    expect(page).to have_content(user.image_url)
     expect(page).to have_content(user.nickname)
+    # expect(page).to have_content(user.starred_repos)
+    page.should have_xpath("#{user.image_url}")
 
   end
 end
