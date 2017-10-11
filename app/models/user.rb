@@ -14,6 +14,17 @@ class User < ApplicationRecord
   end
 
   def starred_repos
-    GithubService.starred_repos(nickname)
+    CreateRepo.new(nickname).starred
+    # GithubService.starred_repos(nickname)
+  end
+
+  def followers
+    Follow.followers(nickname)
+    # GithubService.followers(nickname)
+  end
+
+  def following
+    Follow.following(nickname)
+    # GithubService.following(nickname)
   end
 end

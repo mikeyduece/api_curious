@@ -2,10 +2,11 @@ require 'webmock/rspec'
 require 'vcr'
 
 VCR.configure do |config|
-  config.allow_http_connections_when_no_cassette = true
   config.cassette_library_dir = "spec/cassettes"
   config.hook_into :webmock
+  config.filter_sensitive_data('<GITHUB_KEY>') { ENV["GITHUB_KEY"] }
 end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -29,8 +30,7 @@ def stub_omniauth
                 "name" => "Mike Heft",
                "image" => "https://avatars2.githubusercontent.com/u/25080717?v=4"            },
           "credentials" => {
-                "token" => "a4b473b6a3d21e462a71122421aad2fd04882d73"
-            }
+                "token" => ENV['github_test']            }
           })
 end
 # Requires supporting ruby files with custom matchers and macros, etc, in
