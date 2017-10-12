@@ -12,20 +12,12 @@ Repos you're following
 
 </ul>
 
-<ul>
-
-<% @user.followers.each do |follower| %>
-  <li><%= follower.name %></li>
-<%end %>
-
-</ul>
 
 <ul>
 
 <% @user.following.each do |follow| %>
   <li><%= image_tag follow.image_url %>
   <%= link_to follow.name, follow.html_url %>
-  <%= follow.repos_url %></li>
 <%end %>
 
 </ul>

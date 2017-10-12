@@ -19,12 +19,12 @@ class User < ApplicationRecord
   end
 
   def followers
-    Follow.followers(nickname)
+    FollowSearch.new(nickname).followers
     # GithubService.followers(nickname)
   end
 
   def following
-    Follow.following(nickname)
+    FollowSearch.new(nickname).following
     # GithubService.following(nickname)
   end
 end

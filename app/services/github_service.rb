@@ -31,7 +31,7 @@ class GithubService
   end
 
   def followers
-    get_url("/users/#{user}/following")
+    get_url("/users/#{user}/followers")
   end
 
   def self.followers(user)
