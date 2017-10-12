@@ -4,7 +4,9 @@ require 'vcr'
 VCR.configure do |config|
   config.cassette_library_dir = "spec/cassettes"
   config.hook_into :webmock
+  config.filter_sensitive_data('<GITHUB_KEY>') { ENV["GITHUB_KEY"] }
 end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -14,6 +16,23 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+def stub_omniauth
+  # first, set OmniAuth to run in test mode
+  OmniAuth.config.test_mode = true
+  # then, provide a set of fake oauth data that
+  # omniauth will use when a user tries to authenticate:
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+     "provider" => "github",
+          "uid" => "25080717",
+         "info" => {
+            "nickname" => "mikeyduece",
+               "email" => "mikeheft@gmail.com",
+                "name" => "Mike Heft",
+               "image" => "https://avatars2.githubusercontent.com/u/25080717?v=4"            },
+          "credentials" => {
+                "token" => ENV['github_test']            }
+          })
+end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

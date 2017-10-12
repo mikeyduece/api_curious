@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def create
-    require 'pry'; binding.pry
     if params[:provider].present?
       @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       set_session_user_id
@@ -19,7 +18,7 @@ class SessionsController < ApplicationController
     if @user
       session[:user_id] = @user.id
       flash[:notice] = "Logged in as #{@user.name}"
-      redirect_to root_path
+      redirect_to user_path(current_user)
     end
   end
 

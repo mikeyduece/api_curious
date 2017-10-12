@@ -1,5 +1,23 @@
+<%= image_tag(@user.image_url) %>
 <h1><%= @user.name %></h1>
 <h1><%= @user.email %></h1>
 <h1><%= @user.nickname %></h1>
-<h1><%= @user.image_url %></h1>
+Repos you're following
+<ul>
 
+<% @user.starred_repos.each do |repo| %>
+  <li><%= repo.name %></li>
+  <li>Owned by: <%= link_to repo.owner_name, repo.html_url %></li>
+<% end %>
+
+</ul>
+
+
+<ul>
+
+<% @user.following.each do |follow| %>
+  <li><%= image_tag follow.image_url %>
+  <%= link_to follow.name, follow.html_url %>
+<%end %>
+
+</ul>
