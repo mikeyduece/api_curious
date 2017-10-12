@@ -8,12 +8,20 @@ class FollowSearch
     raw_following.map {|raw| Follow.new(raw)}
   end
 
+  def self.commits
+    require 'pry'; binding.pry
+    raw_commits
+  end
   def followers
     raw_followers.map {|raw| Follow.new(raw)}
   end
 
   private
     attr_reader :name
+
+    def raw_commits
+      service.commits
+    end
 
     def raw_following
       service.following

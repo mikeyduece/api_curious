@@ -18,7 +18,7 @@ feature 'As a User I can' do
   end
 
   scenario 'view my follower and whom I am following' do
-    VCR.use_cassette('follow_info') do
+    VCR.use_cassette('follow_info', :allow_playback_repeats => true) do
       stub_omniauth
 
       visit '/'
@@ -32,7 +32,7 @@ feature 'As a User I can' do
   end
 
   scenario 'view list of my own repos' do
-    VCR.use_cassette('my_repos') do
+    VCR.use_cassette('my_repos', :allow_playback_repeats => true) do
       stub_omniauth
 
       visit '/'
@@ -44,7 +44,7 @@ feature 'As a User I can' do
     end
   end
   scenario 'view list of organizations' do
-    VCR.use_cassette('orgs') do
+    VCR.use_cassette('orgs', :allow_playback_repeats => true) do
       stub_omniauth
 
       visit '/'

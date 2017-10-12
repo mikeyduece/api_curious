@@ -7,6 +7,7 @@ describe GithubService do
         VCR.use_cassette('.initialize') do
 
           user = User.find_or_create_from_auth(stub_omniauth)
+          require 'pry'; binding.pry
 
           service = GithubService.new(user.nickname)
 

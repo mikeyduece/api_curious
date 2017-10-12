@@ -16,6 +16,6 @@ class OrganizationSearch
     end
 
     def service
-      GithubService.new
+      GithubService.new(name)
     end
 end

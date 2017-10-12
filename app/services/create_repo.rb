@@ -5,11 +5,13 @@ class CreateRepo
   end
 
   def pwned
-    raw_repo.map {|raw| Repo.new(raw)}
+    raw_pwn.map {|raw| Repo.new(raw)}
   end
 
   def starred
-    raw_repo.map {|raw| Repo.new(raw)}
+    raw_repo.map do |raw|
+      Repo.new(raw)
+    end
   end
 
   private
@@ -17,6 +19,10 @@ class CreateRepo
 
     def raw_repo
       service.starred_repos
+    end
+
+    def raw_pwn
+      service.owned
     end
 
     def service
