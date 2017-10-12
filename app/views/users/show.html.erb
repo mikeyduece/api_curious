@@ -11,7 +11,11 @@ Repos you're following
 <% end %>
 
 </ul>
-
+<ul>
+  <% @user.owned.each do |repo| %>
+    <li><%= link_to repo.name, repo.html_url %></li>
+  <% end %>
+</ul>
 
 <ul>
 

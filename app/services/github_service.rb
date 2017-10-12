@@ -38,6 +38,14 @@ class GithubService
     new(user).followers
   end
 
+  def organizations
+    get_url("/users/#{user}/orgs")
+  end
+
+  def self.organizations
+    new(user).organizations
+  end
+
 
   private
     attr_reader :user

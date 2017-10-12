@@ -4,6 +4,10 @@ class CreateRepo
     @name = name
   end
 
+  def pwned
+    raw_repo.map {|raw| Repo.new(raw)}
+  end
+
   def starred
     raw_repo.map {|raw| Repo.new(raw)}
   end

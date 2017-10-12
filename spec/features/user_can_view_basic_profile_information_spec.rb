@@ -18,7 +18,7 @@ feature 'As a User I can' do
   end
 
   scenario 'view my follower and whom I am following' do
-    VCR.use_cassette('follow_info', :allow_playback_repeats => true) do
+    VCR.use_cassette('follow_info') do
       stub_omniauth
 
       visit '/'
@@ -28,6 +28,31 @@ feature 'As a User I can' do
 
       expect(page).to have_content(user.followers.first.name)
       expect(page).to have_content(user.following.first.name)
+    end
+  end
+
+  scenario 'view list of my own repos' do
+    VCR.use_cassette('my_repos') do
+      stub_omniauth
+
+      visit '/'
+      click_on 'Login with GitHub'
+
+      user = User.last
+
+      expect(page).to have_content(user.owned.first)
+    end
+  end
+  scenario 'view list of organizations' do
+    VCR.use_cassette('orgs') do
+      stub_omniauth
+
+      visit '/'
+      click_on 'Login with GitHub'
+
+      user = User.last
+
+      expect(page).to have_content(user.organizations.first)
     end
   end
 end

@@ -13,6 +13,10 @@ class User < ApplicationRecord
     end
   end
 
+  def owned
+    CreateRepo.new(nickname).pwned
+  end
+
   def starred_repos
     CreateRepo.new(nickname).starred
     # GithubService.starred_repos(nickname)
