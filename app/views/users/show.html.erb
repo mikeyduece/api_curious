@@ -21,9 +21,9 @@ Repos you own:
 <ul>
 Following:
 <% @user.following.each do |follow| %>
-  <li><%= image_tag follow.image_url %>
+  <li><%= image_tag follow.image_url, width: '50em' %>
   <%= link_to follow.name, follow.html_url %>
-  <li><%= follow.commits %></li>
+  <li> Number of Commits: <%= follow.commits %></li>
 <%end %>
 
 </ul>
@@ -31,8 +31,8 @@ Following:
 Followers:
 <ul>
   <% @user.followers.each do |follow| %>
-    <li><%= image_tag follow.image_url  %><%= link_to follow.name, follow.html_url %></li>
-    <li><%= follow.commits %></li>
+    <li><%= image_tag follow.image_url, width: '50em' %><%= link_to follow.name, follow.html_url %></li>
+    <li> Number of Commits: <%= follow.commits %></li>
   <% end %>
 </ul>
 
