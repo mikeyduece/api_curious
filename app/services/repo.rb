@@ -7,5 +7,4 @@ class Repo
     @owner_name = repo[:owner][:login]
     @html_url = repo[:html_url]
   end
-
 end

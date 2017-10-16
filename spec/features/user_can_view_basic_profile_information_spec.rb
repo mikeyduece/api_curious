@@ -30,4 +30,29 @@ feature 'As a User I can' do
       expect(page).to have_content(user.following.first.name)
     end
   end
+
+  scenario 'view list of my own repos' do
+    VCR.use_cassette('my_repos', :allow_playback_repeats => true) do
+      stub_omniauth
+
+      visit '/'
+      click_on 'Login with GitHub'
+
+      user = User.last
+
+      expect(page).to have_content(user.owned.first)
+    end
+  end
+  scenario 'view list of organizations' do
+    VCR.use_cassette('orgs', :allow_playback_repeats => true) do
+      stub_omniauth
+
+      visit '/'
+      click_on 'Login with GitHub'
+
+      user = User.last
+
+      expect(page).to have_content(user.organizations.first)
+    end
+  end
 end

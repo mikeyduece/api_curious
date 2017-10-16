@@ -1,23 +1,53 @@
-<%= image_tag(@user.image_url) %>
-<h1><%= @user.name %></h1>
-<h1><%= @user.email %></h1>
-<h1><%= @user.nickname %></h1>
-Repos you're following
-<ul>
-
+Repos you're following:
+<ul class='collection'>
 <% @user.starred_repos.each do |repo| %>
-  <li><%= repo.name %></li>
-  <li>Owned by: <%= link_to repo.owner_name, repo.html_url %></li>
+  <li class='collection-item avatar'><i class='material-icons circle'>folder</i>
+    <span class='title'><%= repo.name %></span>
+    Owned by: <a class='secondary-content'><a><%= link_to repo.owner_name, repo.html_url %></a></li>
 <% end %>
 
 </ul>
+Repos you own:
+  <% @user.owned.each do |repo| %>
+    <div class="modal modal-fixed-footer" id='iframe_modal'  style='width:98%;background:#ECEFF1;'>
+      <div class="modal-content">
+        <h5 id='modal-title'><%= repo.name %></h5>
+        <iframe style='width:100%;border:none;'></iframe>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn red">Close</a>
+      </div>
+    </div>
+    <a class='in_iframe_modal' data-modal-title="Iframe Modal" href="<%= repo.html_url %>"><%= repo.name %></a>
+  <% end %>
 
 
 <ul>
-
+Following:
 <% @user.following.each do |follow| %>
-  <li><%= image_tag follow.image_url %>
+  <li><%= image_tag follow.image_url, width: '50em' %>
   <%= link_to follow.name, follow.html_url %>
+  <li> Number of Commits: <%= follow.commits %></li>
 <%end %>
 
+</ul>
+
+Followers:
+<ul>
+  <% @user.followers.each do |follow| %>
+    <li><%= image_tag follow.image_url, width: '50em' %><%= link_to follow.name, follow.html_url %></li>
+    <li> Number of Commits: <%= follow.commits %></li>
+  <% end %>
+</ul>
+
+Organizations:
+<ul>
+  <% @user.organizations.each do |org| %>
+    <% require 'pry'; binding.pry %>
+    <li><%= org.image %></li>
+    <li><%= org.name %></li>
+    <li><%= org.memebers %></li>
+    <li><%= org.public_members %></li>
+  <% end %>
 </ul>

@@ -4,18 +4,33 @@
     <title>ApiCurious</title>
     <%= csrf_meta_tags %>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if current_user.nil? %>
-      <%= link_to "Login with GitHub", "/auth/github" %>
-    <% else %>
-        <%= link_to 'Logout', signout_path %>
-    <% end %>
-    <%= yield %>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <nav class='row'>
+        <div class='nav-wrapper'>
+            <%= image_tag(@user.image_url, id: 'profile', class: 'circle left brand-log') %>
+            <%= @user.name %>
+            <%= @user.email %>
+            <%= @user.nickname %>
+            <% if current_user.nil? %>
+                  <%= link_to "Login with GitHub", "/auth/github" %>
+                <% else %>
+                  <%= link_to 'Logout', signout_path %>
+                <% end %>
+          <%= yield %>
+        </div>
+      </nav>
   </body>
 </html>
