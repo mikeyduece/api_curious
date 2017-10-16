@@ -1,22 +1,27 @@
-<%= image_tag(@user.image_url) %>
-<h1><%= @user.name %></h1>
-<h1><%= @user.email %></h1>
-<h1><%= @user.nickname %></h1>
 Repos you're following:
-<ul>
-
+<ul class='collection'>
 <% @user.starred_repos.each do |repo| %>
-  <li><%= repo.name %></li>
-  <li>Owned by: <%= link_to repo.owner_name, repo.html_url %></li>
+  <li class='collection-item avatar'><i class='material-icons circle'>folder</i>
+    <span class='title'><%= repo.name %></span>
+    Owned by: <a class='secondary-content'><a><%= link_to repo.owner_name, repo.html_url %></a></li>
 <% end %>
 
 </ul>
 Repos you own:
-<ul>
   <% @user.owned.each do |repo| %>
-    <li><%= link_to repo.name, repo.html_url %></li>
+    <div class="modal modal-fixed-footer" id='iframe_modal'  style='width:98%;background:#ECEFF1;'>
+      <div class="modal-content">
+        <h5 id='modal-title'><%= repo.name %></h5>
+        <iframe style='width:100%;border:none;'></iframe>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn red">Close</a>
+      </div>
+    </div>
+    <a class='in_iframe_modal' data-modal-title="Iframe Modal" href="<%= repo.html_url %>"><%= repo.name %></a>
   <% end %>
-</ul>
+
 
 <ul>
 Following:

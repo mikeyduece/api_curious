@@ -18,3 +18,8 @@
 $primary-color: color("black", "lighten-2") !default;
 $secondary-color: color("teal", "darken-4") !default;
 @import 'materialize';
+
+#profile {
+  height: 6vmax;
+  width: 6vmax;
+}
