@@ -9,7 +9,6 @@ class FollowSearch
   end
 
   def self.commits
-    require 'pry'; binding.pry
     raw_commits
   end
   def followers
